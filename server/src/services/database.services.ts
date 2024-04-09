@@ -1,5 +1,6 @@
 import { Collection, Db, MongoClient, ServerApiVersion } from 'mongodb'
 import env from '~/config/environment.env'
+import RefreshToken from '~/models/schemas/RefreshToken.schema'
 import User from '~/models/schemas/User.schema'
 
 const uri = `mongodb+srv://${env.MONGODB_USERNAME}:${env.MONGODB_PASSWORD}@twitterapi.ivi7mba.mongodb.net/?retryWrites=true&w=majority&appName=twitterapi`
@@ -29,6 +30,10 @@ class DatabaseService {
 
   get users(): Collection<User> {
     return this.database.collection(env.MONGODB_USERS_COLLECTION as string)
+  }
+
+  get refreshTokens(): Collection<RefreshToken> {
+    return this.database.collection(env.MONGODB_REFRESH_TOKENS_COLLECTION as string)
   }
 }
 
